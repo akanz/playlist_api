@@ -1,0 +1,16 @@
+<%- include ('partials/header') -%>
+
+<section class="signup-form">
+    <h3>New Playlist</h3>
+    <form action="/playlist" method="POST">
+        <div class="form-group">
+          <label>title</label>
+          <input type="text" class="form-control" name="title">
+        </div>
+        <div class="form-group">
+            <label>Playlist cover</label>
+          <input type="text" class="form-control" placeholder="image url" name="image">
+        </div>
+        <button type="submit" class="btn btn-slate">add</button>
+      </form>
+</section>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>music app</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="icon" href="/images/icon.svg" type="image/svg" sizes="16x16">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="https://kit.fontawesome.com/63d8293e26.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="/css/auth.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/playlist.css">
+
+</head>
+<body>
+  <nav class="nav">
+    <div class="container">
+        <div class="logo">
+            <a href="/playlist">Playlist app</a>
+        </div>
+        <div id="mainListDiv" class="main_list">
+            <ul class="navlinks">
+                <li><a href="/playlist/new">
+                  <i class="far fa-plus-square"></i>new playlist
+                  </a>
+                </li>
+                <li><a href="#">Portfolio</a></li>
+                <% if(! currentuser) { %>
+                <li>
+                  <a href="/login">
+                    <i class="fas fa-sign-in-alt"></i>Login
+                  </a>
+                </li>
+                <li>
+                  <a href="/signup">
+                    <i class="far fa-user"></i>Signup
+                  </a>
+                </li>
+                 <% } else { %>
+                  <li>
+                    <a href="/login">
+                      <i class="fas fa-user-circle"></i>profile
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/logout">
+                      <i class="fas fa-sign-in-alt"></i>Logout
+                    </a>
+                  </li>
+                <% } %>
+                
+            </ul>
+        </div>
+        <span class="navTrigger">
+            <i></i>
+            <i></i>
+            <i></i>
+        </span>
+    </div>
+</nav>
+
+<script>
+    $(window).scroll(function() {
+    if ($(document).scrollTop() > 50) {
+        $('.nav').addClass('affix');
+        console.log("OK");
+    } else {
+        $('.nav').removeClass('affix');
+    }
+  });
+  $('.navTrigger').click(function () {
+  $(this).toggleClass('active');
+  console.log("Clicked menu");
+  $("#mainListDiv").toggleClass("show_list");
+  $("#mainListDiv").fadeIn();
+
+  });
+</script>
+<script src="js/layout.js"></script>
+
+</body>
+</html>

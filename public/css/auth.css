@@ -1,0 +1,47 @@
+.signup-form {
+    width: 40vw;
+    margin: 5em auto;
+    background-color: slateblue;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+.signup-form h3 {
+    text-align: center;
+    color: azure;
+}
+.signup-form form {
+    margin: 2em 0 ;
+}
+.signup-form .btn-slate {
+    background-color: black;
+    color: azure;
+}
+.signup-form .btn-slate:hover {
+    background-color: azure;
+    color: slateblue;
+    font-weight: bold;
+}
+
+.login-form {
+    width: 40vw;
+    margin: 5em auto;
+    background-color: slateblue;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+.login-form h3 {
+    text-align: center;
+    color: azure;
+}
+.login-form form {
+    margin: 2em 0 ;
+}
+.login-form .btn-slate {
+    background-color: black;
+    color: azure;
+}
+.login-form .btn-slate:hover {
+    background-color: azure;
+    color: slateblue;
+    font-weight: bold;
+}

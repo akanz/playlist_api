@@ -1,0 +1,40 @@
+<%- include ('partials/header') -%>
+<section class="playlist-section">
+    <h2>
+        <%= playlist.title %> Songs
+        <% if(currentuser && playlist.owner.id.equals(currentuser._id)) { %>
+        <span class="right">
+            <a href="/playlist/<%= playlist._id %>/tracks/new">
+                <i class="far fa-plus-square"></i>
+            </a> 
+        </span>
+        <% } %>
+    </h2>
+    
+    <% playlist.tracks.forEach( (list)=>{ %>
+    <div class="tracks">
+        <div class="image">
+            <img src="<%= list.image %>">
+        </div>
+        <div class="details">
+            <span class="title">
+                <a href="/playlist/<%= list._id %>">
+                    <%= list.title %> 
+                </a>
+                <h6>-<%= list.artiste %></h6>
+            </span>
+            <span class="small">
+                <small><%= list.added.toDateString() %></small>
+            </span>
+            <% if(currentuser && playlist.owner.id.equals(currentuser._id)) { %>
+            <form class="delete-track" action="/playlist/<%=playlist._id %>/tracks/<%= list._id %>?_method=delete" method="POST">
+                <button class="btn btn-danger">
+                    <i class="far fa-trash-alt"></i>
+                </button>
+            </form>
+            <% } %>
+        </div>
+    </div>
+    <% }) %>
+</section>
+

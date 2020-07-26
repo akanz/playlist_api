@@ -1,0 +1,32 @@
+<%- include ('partials/header') -%>
+<section class="playlist-section">
+    <% playlist.forEach( (list)=>{ %>
+    <div class="playlist">
+        <div class="image">
+            <img src="<%= list.image %>">
+        </div>
+        <div class="details">
+            <span class="title">
+                <a href="/playlist/<%= list._id %>">
+                    <%= list.title %>
+                </a>
+                <h6>added by-<%= list.owner.name %></h6>
+            </span>
+           
+            <span class="small">
+                <small><%= list.created_at.toDateString() %></small>
+            </span>
+            <% if (currentuser && list.owner.id.equals(currentuser._id)){ %> 
+                <a href="/playlist/<%= list._id %>/edit">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <form class="delete-track" action="/playlist/<%= list._id %>?_method=delete" method="POST">
+                    <button class="btn btn-danger">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                </form>
+            <% } %>
+        </div>
+    </div>
+    <% }) %>
+</section>
