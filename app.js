@@ -23,8 +23,12 @@ const app = express();
 // mongoose.connect('mongodb://localhost/playlist', 
 //     {useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true});
 
-mongoose.connect('mongodb+srv://manakanz:manakanns@cluster0.hvt37.mongodb.net/playlist?retryWrites=true&w=majority', 
-    {useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true});
+mongoose.connect( process.env.DATABASEURL, {useNewUrlParser: true,
+                                             useFindAndModify: false, 
+                                             useUnifiedTopology: true});
+
+
+console.log( process.env.DATABASEURL)
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
