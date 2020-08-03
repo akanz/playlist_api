@@ -6,7 +6,11 @@ const express = require('express'),
       sanitizer = require('express-sanitizer'),
       bodyParser = require('body-parser'),
       LocalStrategy = require('passport-local'),
-      flash = require('connect-flash');
+      flash = require('connect-flash'),
+      dotenv = require('dotenv');
+
+//   
+dotenv.config();
 
 //models 
 const User = require('./models/user')
@@ -21,12 +25,12 @@ const apiRoute = require('./routes/api/api');
 
 const app = express();
 
-mongoose.connect( process.env.DATABASEURL , {useNewUrlParser: true,
+mongoose.connect( process.env.DATABASEURL || 'mongodb://localhost/playlist', {useNewUrlParser: true,
                                              useFindAndModify: false, 
                                              useUnifiedTopology: true});
 
 
-console.log( process.env.DATABASEURL)
+console.log(process.env.DATABASEURL)
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));

@@ -170,4 +170,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# environmental variables
+.env
+
 # End of https://www.toptal.com/developers/gitignore/api/node,windows,visualstudiocode,expressionengine
