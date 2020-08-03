@@ -57,6 +57,6 @@ app.use('/playlist/:id/tracks', trackRoute),
 app.use('/api', apiRoute),
 app.use(authRoute);
 
-app.listen(3000, ()=> {
+app.listen(process.env.PORT, process.env.IP, ()=> {
     console.log('api server running on port 3000');
 })
