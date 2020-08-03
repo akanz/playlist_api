@@ -20,7 +20,10 @@ const authRoute = require('./routes/auth'),
 const apiRoute = require('./routes/api/api');
 
 const app = express();
-mongoose.connect('mongodb://localhost/playlist', 
+// mongoose.connect('mongodb://localhost/playlist', 
+//     {useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true});
+
+mongoose.connect('mongodb+srv://manakanz:manakanns@cluster0.hvt37.mongodb.net/playlist?retryWrites=true&w=majority', 
     {useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true});
 
 app.set('view engine', 'ejs');
