@@ -8,8 +8,7 @@ const express = require('express'),
       LocalStrategy = require('passport-local'),
       flash = require('connect-flash'),
       dotenv = require('dotenv');
-
-//   
+      
 dotenv.config();
 
 //models 
@@ -25,12 +24,12 @@ const apiRoute = require('./routes/api/api');
 
 const app = express();
 
-mongoose.connect( process.env.DATABASEURL || 'mongodb://localhost/playlist', {useNewUrlParser: true,
+mongoose.connect(process.env.DATABASEURL, {useNewUrlParser: true,
                                              useFindAndModify: false, 
                                              useUnifiedTopology: true});
 
 
-console.log(process.env.DATABASEURL)
+console.log(process.env.DATABASEURL , typeof(process.env.DATABASEURL))
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
@@ -63,6 +62,7 @@ app.use('/playlist/:id/tracks', trackRoute),
 app.use('/api', apiRoute),
 app.use(authRoute);
 
-app.listen(process.env.PORT, process.env.IP, ()=> {
-    console.log('api server running on port 3000');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT , process.env.IP, ()=> {
+    console.log('api server running on port ' + PORT);
 })
