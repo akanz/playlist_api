@@ -20,10 +20,8 @@ const authRoute = require('./routes/auth'),
 const apiRoute = require('./routes/api/api');
 
 const app = express();
-// mongoose.connect('mongodb://localhost/playlist', 
-//     {useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true});
 
-mongoose.connect( process.env.DATABASEURL, {useNewUrlParser: true,
+mongoose.connect( process.env.DATABASEURL , {useNewUrlParser: true,
                                              useFindAndModify: false, 
                                              useUnifiedTopology: true});
 
