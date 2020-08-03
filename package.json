@@ -20,6 +20,7 @@
   },
   "devDependencies": {},
   "scripts": {
+    "start": "app.js",
     "test": "ok"
   },
   "author": "Samuel Akande",
