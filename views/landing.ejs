@@ -1,9 +1,28 @@
 <%- include ('partials/header') -%>
 <div class="container">
+    <% if (error && error.length > 0) {%>
+        <div class="alert alert-danger">
+          <%= error %>
+        </div>
+        <% } %>
+      
+        <% if (success && success.length > 0) {%>
+          <div class="alert alert-success">
+            <%= success %>
+          </div>
+          <% } %>
+    
+          <% if (warning && warning.length > 0) {%>
+            <div class="alert alert-warning">
+              <%= warning %>
+            </div>
+            <% } %>
     <div class="jumbotron">
       <h1>Playlist App</h1>    
-      
+     
+            
       <a href="/playlist" class="btn btn-slate">
           Get started
       </a>
+
   </div>

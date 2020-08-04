@@ -45,6 +45,7 @@ app.use(session ({
         })
     )
 
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 passport.serializeUser(User.serializeUser());
@@ -53,7 +54,10 @@ passport.use(new LocalStrategy(User.authenticate()));
 
 app.use(function (req,res,next) {
     res.locals.currentuser = req.user;
-    next();
+    res.locals.success = req.flash('success');
+    res.locals.warning = req.flash('warning');
+    res.locals.error = req.flash('error');
+    next(); 
 })
 
 app.use('/', landing);

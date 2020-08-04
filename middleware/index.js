@@ -8,6 +8,7 @@ middleware.isLoggedin = (req,res,next)=>{
     if(req.isAuthenticated()){
         return next();
     }
+    req.flash('warning', 'Please login to your account')
     res.redirect('/login');
 }
 
@@ -22,6 +23,7 @@ middleware.isOwner = (req,res,next)=>{
                     next()
                 }
                 else{
+                    req.flash('error', 'Unauthorized access')
                     res.redirect('back')
                 }
             }
