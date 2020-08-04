@@ -19,69 +19,92 @@
 
 </head>
 <body>
-  <nav class="nav">
-    <div class="container">
-        <div class="logo">
-            <a href="/playlist">Playlist app</a>
-        </div>
-        <div id="mainListDiv" class="main_list">
-            <ul class="navlinks">
-                <li><a href="/playlist/new">
-                  <i class="far fa-plus-square"></i>new playlist
-                  </a>
-                </li>
-                <li><a href="#">Portfolio</a></li>
-                <% if(! currentuser) { %>
+  <section class="navbar-section">
+    <span class="side-bar-button">
+      <a href="#" onclick="openSideMenu()">
+        <i class="fas fa-bars"></i>
+      </a>
+    </span>
+    <nav class="navbars">
+      <div class="logo">
+          <a href="/playlist">Playlist app</a>
+      </div>
+      <div class="navbar-navs">
+          <ul class="navlinks">
+              <li><a href="/playlist/new">
+                <i class="far fa-plus-square"></i>new playlist
+                </a>
+              </li>
+              <li><a href="#">Portfolio</a></li>
+              <% if(! currentuser) { %>
+              <li>
+                <a href="/login">
+                  <i class="fas fa-sign-in-alt"></i>Login
+                </a>
+              </li>
+              <li>
+                <a href="/signup">
+                  <i class="far fa-user"></i>Signup
+                </a>
+              </li>
+               <% } else { %>
                 <li>
                   <a href="/login">
-                    <i class="fas fa-sign-in-alt"></i>Login
+                    <i class="fas fa-user-circle"></i>profile
                   </a>
                 </li>
                 <li>
-                  <a href="/signup">
-                    <i class="far fa-user"></i>Signup
+                  <a href="/logout">
+                    <i class="fas fa-sign-in-alt"></i>Logout
                   </a>
                 </li>
-                 <% } else { %>
-                  <li>
-                    <a href="/login">
-                      <i class="fas fa-user-circle"></i>profile
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/logout">
-                      <i class="fas fa-sign-in-alt"></i>Logout
-                    </a>
-                  </li>
-                <% } %>
-                
-            </ul>
-        </div>
-        <span class="navTrigger">
-            <i></i>
-            <i></i>
-            <i></i>
-        </span>
-    </div>
+              <% } %>
+              
+          </ul>
+      </div>
+      <span class="navTrigger">
+          <i></i>
+          <i></i>
+          <i></i>
+      </span>
 </nav>
+  <div id="side-menu" class="sidebar">
+    <a href="#" class="btn-close" onclick="closeSideMenu()">&times;</a>
+    <ul class="side-nav">
+      <li>
+        <a href="/playlist/new">
+          <i class="far fa-plus-square"></i>new playlist
+        </a>
+      </li>
+      <% if(! currentuser) { %>
+        <li>
+          <a href="/login">
+            <i class="fas fa-sign-in-alt"></i>Login
+          </a>
+        </li>
+        <li>
+          <a href="/signup">
+            <i class="far fa-user"></i>Signup
+          </a>
+        </li>
+         <% } else { %>
+          <li>
+            <a href="/login">
+              <i class="fas fa-user-circle"></i>profile
+            </a>
+          </li>
+          <li>
+            <a href="/logout">
+              <i class="fas fa-sign-in-alt"></i>Logout
+            </a>
+          </li>
+        <% } %>
+    </ul>
+    
+  </div>
+  </section>
+ 
 
-<script>
-    $(window).scroll(function() {
-    if ($(document).scrollTop() > 50) {
-        $('.nav').addClass('affix');
-        console.log("OK");
-    } else {
-        $('.nav').removeClass('affix');
-    }
-  });
-  $('.navTrigger').click(function () {
-  $(this).toggleClass('active');
-  console.log("Clicked menu");
-  $("#mainListDiv").toggleClass("show_list");
-  $("#mainListDiv").fadeIn();
-
-  });
-</script>
 <script src="js/layout.js"></script>
 
 </body>
