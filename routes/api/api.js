@@ -18,21 +18,55 @@ router.get('/signup', (req,res)=>{
     res.send('GET API Sign up route')
 });
 router.post('/signup', (req,res)=>{
-    var hashedPassword = bcrypt.hashSync(req.body.password, 8);
+    var hashedPassword = bcrypt.hashSync(req.body.password, 8),
+        name = req.body.username,
+        password = req.body.password,
+        confirm = req.body.confirm;
 
-        User.create({
-            username : req.body.username,
-            password : hashedPassword
-        },
-        function (err, user) {
-            if (err) return res.status(500).json("There was a problem registering the user.")
-            // create a token
-            var token = jwt.sign({ id: user._id }, '98765etdgcvbvgftr67ouilkm', {
-            expiresIn: 86400 // expires in 24 hours
-            });
-            res.status(200).json({ auth: true, token: token });
-        }); 
+        User.findOne({ username:  name}).exec()
+        .then( (user)=>{
+            if(name == user.username){
+                res.json('User already exists')
+            }
+            else if (confirm != password){
+                res.json('Password do not match')
+            }
+            else{
+                User.create({
+                    username : req.body.username,
+                    password : hashedPassword
+                },
+                function (err, user) {
+                    if (err) return res.status(500).json("There was a problem registering the user.")
+                    // create a token
+                    var token = jwt.sign({ id: user._id }, '98765etdgcvbvgftr67ouilkm', {
+                    expiresIn: 86400 // expires in 24 hours
+                    });
+                    res.status(200).json({ auth: true, token: token });
+                }); 
+            }  
+        })
+        .catch( (err)=>{
+            if (confirm != password){
+                res.json('Password do not match')
+            }
+            else{
+                User.create({
+                    username : req.body.username,
+                    password : hashedPassword
+                },
+                function (err, user) {
+                    if (err) return res.status(500).json("There was a problem registering the user.")
+                    // create a token
+                    var token = jwt.sign({ id: user._id }, '98765etdgcvbvgftr67ouilkm', {
+                    expiresIn: 86400 // expires in 24 hours
+                    });
+                    res.status(200).json({ auth: true, token: token });
+                }); 
+            } 
+        }) ;
 });
+       
 
 // user route
 router.get('/me', verifyToken , function(req, res) {
@@ -112,7 +146,7 @@ router.post('/playlist', verifyToken, (req,res)=> {
         })
 });
 
-router.get('/playlist/:id',  (req,res)=> {
+router.get('/playlist/:id', verifyToken, (req,res)=> {
     Playlist.findById(req.params.id).populate('tracks').exec((err,info)=>{
         if(err){
             res.json(err)
@@ -193,7 +227,7 @@ router.post('/playlist/:id/tracks', verifyToken, (req,res)=>{
                         }
                         else{
                             console.log('works fine')
-                            res.json('successfully added track to ' + playlist.owner.name + ' playlist')
+                            res.json('successfully added track to ' + playlist.title + ' playlist')
                         }
                     })
                 }
@@ -235,10 +269,10 @@ router.get('/generatePdf', (req,res)=>{
             // Embed a font, set the font size, and render some text
             pdf
             .fontSize(25)
-            .text('this is a pdf created', 100, 100);
+            .text('this is a pdf', 100, 100);
             
-            res.json('PDF created')
             pdf.end();
+            res.json('PDF created')
         }
        
     })

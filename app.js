@@ -25,6 +25,7 @@ const apiRoute = require('./routes/api/api');
 
 const app = express();
 
+mongoose.Promise = global.Promise;
 mongoose.connect(process.env.DATABASEURL, {useNewUrlParser: true,
                                              useFindAndModify: false, 
                                              useUnifiedTopology: true});
