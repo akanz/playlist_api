@@ -4,18 +4,19 @@ body {
     box-sizing: border-box;
     font-family: "Quicksand", sans-serif;
 }
-/*-- Inspiration taken from abdo steif -->
-/* --> https://codepen.io/abdosteif/pen/bRoyMb?editors=1100*/
+
 
 /* Navbar section */
 
 .navbar-section {
     background-color:slateblue;
     width: 100vw;
-    display: flex;
+    height: 55px;
+    box-sizing: border-box;
   }
    .navbar-section span.side-bar-button{
-    margin: 0 1em;
+    margin: .5em 1em;
+    float: left;
   }
   .navbar-section span.side-bar-button i{
     font-size: 2em;
@@ -36,20 +37,20 @@ body {
     width: 95vw;
     margin: 0 auto;
     box-sizing: border-box;
-    display: flex;
     
   }
  
   nav.navbars .logo {
-    font-size: 2vw;
+    font-size: 2em;
     padding: 5px;
+    float: left;
   }
   nav.navbars .logo a{
     text-decoration: none;
     color: white;
   }
   nav.navbars .navbar-navs {
-    margin-left: 20vw;
+   float: right;
   }
   nav.navbars .navbar-navs i{
     font-size: 25px;
@@ -63,7 +64,7 @@ body {
     margin: 0 ;
     text-decoration: none;
     padding: .8vw;
-    font-size: 1.5vw;
+    font-size: 1.4em;
   }
   nav.navbars .navbar-navs li a:hover{
     background-color: azure;
@@ -94,7 +95,7 @@ body {
     padding: .5rem 0;
     text-decoration: none;
     color: white;
-    font-size: 2vw;
+    font-size: 2em;
   }
   .sidebar a:hover{
     background-color: white;
@@ -141,11 +142,12 @@ body {
 }
 
 @media screen and (max-width: 850px){
-    nav.navbars .navbar-navs {
+  nav.navbars .navbar-navs {
       display: none;
     }
+   
    }
-   @media screen and (min-width: 850px){
+   @media screen and (min-width: 900px){
     .navbar-section .side-bar-button {
       display: none;
     }

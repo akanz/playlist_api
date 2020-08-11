@@ -40,6 +40,7 @@ router.post('/signup', (req,res)=>{
 
 // login routes
 router.get('/login', (req,res)=> {
+    
     res.render('login')
 })
 

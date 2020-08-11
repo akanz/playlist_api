@@ -1,0 +1,15 @@
+<%- include('partials/header') -%>
+
+<h3>Playlist Report</h5>
+	<table class="table table-bordered">
+		<% if (lists.length > 0) { %>
+			<% lists.forEach(list => {%>
+				<tr>
+                    <td><%= list.owner.name %></td>
+                    <td><%= list.title %></td>
+                    <td><%= list.image %></td>
+                    <td><%= list.tracks %></td>
+                </tr>
+		<%	}); %>
+		<% }%>
+	</table>	

@@ -4,9 +4,10 @@
     color: slateblue;
 }
 .playlist {
-    height: 100px;
+    min-height: 70px;
+    height: auto;
     border-bottom: 1px solid slateblue;
-    display: flex;
+
 }
 .playlist a{
     text-decoration: none;
@@ -15,6 +16,7 @@
 .playlist .image{
     box-sizing: border-box;
     width: 20%;
+    float: left;
 }
 .playlist .image img{
     width: 100%;
@@ -24,6 +26,7 @@
     box-sizing: border-box;
     width: 80%;
     position: relative;
+    float: left;
 }
 .playlist span.title {
     font-size: 2em;
@@ -34,7 +37,6 @@
     font-family: cursive;
 }
 .playlist span.small{
-    position: absolute;
     bottom: 0;
     left: 0;
     font-size: 16px;
@@ -60,9 +62,9 @@
 }
 
 .tracks {
-    height: 100px;
+    min-height: 70px;
+    height: auto;
     border-bottom: 1px solid slateblue;
-    display: flex;
 }
 .tracks a{
     text-decoration: none;
@@ -71,6 +73,7 @@
 .tracks .image{
     box-sizing: border-box;
     width: 20%;
+    float: left;
 }
 .tracks .image img{
     width: 100%;
@@ -79,6 +82,7 @@
 .tracks .details{
     box-sizing: border-box;
     width: 80%;
+    float: left;
     position: relative;
 }
 .tracks span.title {
@@ -90,7 +94,7 @@
     font-family: cursive;
 }
 .tracks span.small{
-    position: absolute;
+    
     font-size: 16px;
     bottom: 0;
     left: 0;

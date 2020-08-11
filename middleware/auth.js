@@ -1,32 +1,19 @@
-const Playlist = require('../models/playlist')
-const apiMiddleware = {};
+const Playlist = require('../models/playlist'),
+      jwt = require('jsonwebtoken');
 
-apiMiddleware.isLoggedin = (req,res,next)=>{
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.json('You need to be authenticated')
+function verifyToken(req, res, next) {
+  var token = req.headers['x-access-token'];
+  if (!token)
+    return res.status(403).send({ auth: false, message: 'No token provided.' });
+    
+  jwt.verify(token, '98765etdgcvbvgftr67ouilkm', function(err, decoded) {
+    if (err)
+    return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+      
+    // if everything good, save to request for use in other routes
+    req.userId = decoded.id;
+    next();
+  });
 }
 
-apiMiddleware.isOwner = (req,res,next)=>{
-    if(req.isAuthenticated()){
-        Playlist.findById(req.params.id, (err,list)=>{
-            if(err){
-                res.json(err)
-            }
-            else{
-                if(list.owner.id.equals(req.user._id)){
-                    next()
-                }
-                else{
-                    res.json('You need to be authenticated')
-                }
-            }
-        })
-    }
-    else{
-        res.json('You need to be authenticated')
-    }
-}
-
-module.exports = apiMiddleware
+module.exports = verifyToken;

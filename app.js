@@ -17,6 +17,7 @@ const User = require('./models/user')
 const authRoute = require('./routes/auth'),
       homeRoute = require('./routes/playlist'),
       trackRoute = require('./routes/track'),
+      pdfRoute = require('./routes/pdf'),
       landing = require('./routes/landing');
 
 // api route

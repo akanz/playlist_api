@@ -4,6 +4,7 @@
   "description": "A sign up API",
   "main": "app.js",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
     "dotenv": "^8.2.0",
@@ -12,12 +13,16 @@
     "express-sanitizer": "^1.0.5",
     "express-session": "^1.17.1",
     "express-validator": "^6.6.0",
+    "html-pdf": "^2.2.0",
+    "jsonwebtoken": "^8.5.1",
     "method-override": "^3.0.0",
     "mongoose": "^5.9.25",
     "node": "^14.5.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^6.0.1"
+    "passport-local-mongoose": "^6.0.1",
+    "pdfcrowd": "^4.12.0",
+    "pdfkit": "^0.11.0"
   },
   "devDependencies": {},
   "scripts": {
