@@ -2,7 +2,7 @@
 <section class="playlist-section">
     <h2>
         <%= playlist.title %> Songs
-        <% if(currentuser && playlist.owner.id.equals(currentuser._id)) { %>
+        <% if(currentuser > 0 && playlist.owner.id.equals(currentuser._id)) { %>
         <span class="right">
             <a href="/playlist/<%= playlist._id %>/tracks/new">
                 <i class="far fa-plus-square"></i>
@@ -14,7 +14,7 @@
     <% playlist.tracks.forEach( (list)=>{ %>
     <div class="tracks">
         <div class="image">
-            <img src="<%= list.image %>">
+            <img src="">
         </div>
         <div class="details">
             <span class="title">

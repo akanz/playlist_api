@@ -14,6 +14,7 @@
     "express-session": "^1.17.1",
     "express-validator": "^6.6.0",
     "html-pdf": "^2.2.0",
+    "ituner": "^0.1.4",
     "jsonwebtoken": "^8.5.1",
     "method-override": "^3.0.0",
     "mongoose": "^5.9.25",
@@ -22,7 +23,8 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",
     "pdfcrowd": "^4.12.0",
-    "pdfkit": "^0.11.0"
+    "pdfkit": "^0.11.0",
+    "puppeteer": "^5.2.1"
   },
   "devDependencies": {},
   "scripts": {

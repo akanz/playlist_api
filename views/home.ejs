@@ -34,7 +34,7 @@
             <span class="small">
                 <small><%= list.created_at.toDateString() %></small>
             </span>
-            <% if (currentuser  && list.owner.id.equals(currentuser._id)){ %> 
+            <% if (currentuser > 0  && list.owner.id.equals(currentuser._id)){ %> 
                 <a href="/playlist/<%= list._id %>/edit">
                     <i class="fas fa-edit"></i>
                 </a>

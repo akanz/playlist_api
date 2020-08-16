@@ -8,7 +8,10 @@ const express = require('express'),
       bcrypt = require('bcryptjs'),
       pdfDoc = require('pdfkit'),
       fs = require('fs'),
-      router = express.Router();
+      puppeteer = require('puppeteer'),
+      http = require('http'),
+      router = express.Router(),
+      client = (require('ituner')());
 
 const pdf = new pdfDoc(); 
 
@@ -113,7 +116,7 @@ router.get('/playlist/new', verifyToken, (req,res)=> {
     res.send('GET API new playlist')
 });
 
-router.get('/playlist',(req,res)=> {
+router.get('/playlist', verifyToken,(req,res)=> {
     Playlist.find({},null,{sort:'-created_at'}, (err,all)=>{
         if(err){
             res.json('Unable to get playlist')
@@ -196,14 +199,14 @@ router.delete('/playlist/:id',verifyToken,  (req,res)=> {
 
 
 // tracks route
-router.get('/playlist/:id/tracks/new', verifyToken, (req,res)=>{
+router.get('/playlist/:id/tracks', verifyToken, (req,res)=>{
     Playlist.findById(req.params.id, (err,info)=>{
         if(err){
-            console.log('Unable to add songs')
+            console.log('Unable to get songs')
             res.json(err)
         }
         else{
-            res.json(info)
+            res.json(info.tracks)
         }
     })
 });
@@ -215,28 +218,54 @@ router.post('/playlist/:id/tracks', verifyToken, (req,res)=>{
             res.json(err)
         }
         else{
-            Track.create(req.body.info, (err,newsong)=>{
-                if(err){
-                    console.log('Error occurred when adding a song')
+            client.findBestMatch(req.body.title + ' ' + req.body.artiste, function (err, result) {
+                if (err) {
+                  console.error(err);
                 }
-                else{
-                    playlist.tracks.push(newsong)
-                    playlist.save( ()=>{
-                        if(err){
-                            console.log('cannot add song')
-                        }
-                        else{
-                            console.log('works fine')
-                            res.json('successfully added track to ' + playlist.title + ' playlist')
-                        }
-                    })
+               
+                console.log(result);
+                const somestuff = {
+                    title: req.body.title,
+                    artiste: req.body.artiste,
+                    song: result
                 }
-            })
+                Track.create(somestuff, (err,newsong)=>{
+                    if(err){
+                        console.log('Error occurred when adding a song')
+                    }
+                    else{
+                        playlist.tracks.push(newsong)
+                        playlist.save( ()=>{
+                            if(err){
+                                console.log('cannot add song')
+                            }
+                            else{
+                                console.log('works fine')
+                                res.json('successfully added track to ' + playlist.owner.name + ' playlist')
+                            }
+                        })
+                    }
+                })
+              });
+    
         }
     })
 });
 
-router.delete('playlist/:id/tracks/:track_id', verifyToken, (req,res)=>{
+router.get('/playlist/:id/tracks/:track_id', verifyToken, (req,res)=>{
+    Track.findById(req.params.track_id, (err,track)=>{
+        if(err){
+            console.log('Unable to get track')
+            res.json(err)
+        }
+        else{
+            console.log('done')
+            res.json(track)
+        }
+    })
+})
+
+router.delete('/playlist/:id/tracks/:track_id', verifyToken, (req,res)=>{
     Track.findByIdAndRemove(req.params.track_id, (err,done)=>{
         if(err){
             console.log('Unable to delete track')
@@ -251,33 +280,23 @@ router.delete('playlist/:id/tracks/:track_id', verifyToken, (req,res)=>{
 
 
     
-router.get('/generatePdf', (req,res)=>{
-    Playlist.find({}, (err, data)=>{
-        if(err){
-            console.log(err)
-            res.json('Unable to get data')
-        }
-        else{
-            data.forEach( (datum)=>{
-                console.log(datum.title)
-            })
-            
-            // Pipe its output somewhere, like to a file or HTTP response
-            // See below for browser usage
-            pdf.pipe(fs.createWriteStream('playlist.pdf'));
-            
-            // Embed a font, set the font size, and render some text
-            pdf
-            .fontSize(25)
-            .text('this is a pdf', 100, 100);
-            
-            pdf.end();
-            res.json('PDF created')
-        }
-       
+router.get('/generatepdf', (req,res)=>{
+    Playlist.find({}).exec()
+    .then( (data)=>{
+        res.render('report', {lists: data})
     })
-    
-     
+    .catch( (err)=>{
+        console.log(err)
+    })
 })
+// (async () => {
+//     const browser = await puppeteer.launch();
+//     const page = await browser.newPage();
+//     await page.goto('http://127.0.0.1:3000/api/playlist', {waitUntil: 'networkidle2'});
+//     await page.pdf({path: 'tracks.pdf', format: 'A4'});
+  
+//     await browser.close();
+//   })();
+
 
 module.exports = router;

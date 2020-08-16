@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const songSchema = new mongoose.Schema({
     title:String,
     artiste:String,
-    image:{type:String, default:''},
+    song:Object,
     added:{type:Date, default:Date.now}
 })
 
